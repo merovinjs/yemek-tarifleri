@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ProductCard.module.css";
+import { Link } from "react-router-dom";
 function ProductCard({ tarif }) {
   return (
     <div className="col-3">
@@ -12,9 +13,9 @@ function ProductCard({ tarif }) {
         <div className="card-body">
           <h5 className="card-title">{tarif.baslik}</h5>
           <p className={styles.acıklama}>{tarif.açıklama}</p>
-          <a href={tarif.url} className="btn btn-primary">
+          <Link to={`/tarifler/${tarif.id}`} className="btn btn-primary">
             Tarifi incele
-          </a>
+          </Link>
         </div>
       </div>
     </div>
