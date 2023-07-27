@@ -4,17 +4,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import styles from "./Details.module.css";
+import { useFetch } from "../../hooks/useFetch";
 
 function Details() {
-  const [tarif, setTarif] = useState(null);
   const { id } = useParams();
 
-  let url = `http://localhost:3000/tarifler/${id}`;
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setTarif(data));
-  }, [url]);
+  let url = `https://json-server-vercel-nine-xi.vercel.app/tarifler/${id}`;
+
+  const { data: tarif } = useFetch(url);
 
   return (
     <div className="row mt-3">
