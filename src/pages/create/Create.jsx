@@ -12,7 +12,10 @@ function Create() {
   const [resim, setResim] = useState("");
   const [url, seturl] = useState("");
   const malzemeinput = useRef(null);
-  const { postData } = useFetch("http://localhost:3000/tarifler", "POST");
+  const { postData } = useFetch(
+    "https://yemek-tarifleri-node-js.vercel.app/createPosts",
+    "POST"
+  );
   const handeleSubmit = (e) => {
     e.preventDefault();
     postData({ baslik, aciklama, malzemeler, hazirlanisi, resim, url });
