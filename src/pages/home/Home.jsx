@@ -3,7 +3,7 @@ import ProductCard from "../../components/productCard/ProductCard";
 import { useFetch } from "../../hooks/useFetch";
 
 function Home() {
-  const url = "https://yemek-tarifleri-node-js.vercel.app/getPosts";
+  const url = "https://vercel.com/proprogam/yemek-tarifleri-node-js/getPosts";
   const { data: tarifler, isLoading, error } = useFetch(url);
 
   return (

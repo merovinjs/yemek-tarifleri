@@ -13,7 +13,7 @@ function Create() {
   const [url, seturl] = useState("");
   const malzemeinput = useRef(null);
   const { postData } = useFetch(
-    "https://yemek-tarifleri-node-js.vercel.app/createPosts",
+    "https://vercel.com/proprogam/yemek-tarifleri-node-js/createPosts",
     "POST"
   );
   const handeleSubmit = (e) => {
