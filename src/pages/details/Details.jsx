@@ -11,10 +11,13 @@ function Details() {
 
   let url = `https://json-server-vercel-nine-xi.vercel.app/tarifler/${id}`;
 
-  const { data: tarif } = useFetch(url);
+  const { data: tarif, isLoading, error } = useFetch(url);
 
   return (
     <div className="row mt-3">
+      {error && <h1 className="text-danger">{error}</h1>}
+
+      {isLoading && <h1>tarif ...</h1>}
       {tarif && (
         <>
           <div className="col-4">
