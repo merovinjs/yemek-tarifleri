@@ -4,31 +4,36 @@ import { useState } from "react";
 
 function Create() {
   const [baslik, setBaslik] = useState("");
-  const [aciklama, setAciklama] = useState("");
+  const [açıklama, setAciklama] = useState("");
   const [malzeme, setMalzeme] = useState("");
   const [malzemeler, setMalzemeler] = useState([]);
   const [hazirlanisi, setHazirlanisi] = useState("");
   const [resim, setResim] = useState("");
   const [url, seturl] = useState("");
   const malzemeinput = useRef(null);
-
-  const handeleSubmit = (e) => {
+  const handeleSubmit = async (e) => {
     e.preventDefault();
-    fetch("https://yemek-tarifleri-node-js.vercel.app/createPosts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        baslik,
-        aciklama,
-        malzemeler,
-        hazirlanisi,
-        resim,
-        url,
-      }),
-    });
+    const response = await fetch(
+      "https://yemek-tarifleri-node-js.vercel.app/createPosts",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          baslik,
+          açıklama,
+          malzemeler,
+          hazirlanisi,
+          resim,
+          url,
+        }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
   };
+
   const handleMalzemeler = (e) => {
     const item = malzeme.trim();
     if (item && !malzemeler.includes(item)) {
@@ -52,11 +57,11 @@ function Create() {
             id="baslik"
             onChange={(e) => setBaslik(e.target.value)}
           />
-          <label htmlFor="aciklama">Açıklama</label>
+          <label htmlFor="açıklama">Açıklama</label>
           <input
             type="text"
             className="form-control"
-            id="aciklama"
+            id="açıklama"
             onChange={(e) => setAciklama(e.target.value)}
           />
           <label htmlFor="malzemeler">
