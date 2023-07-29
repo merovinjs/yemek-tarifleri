@@ -1,7 +1,6 @@
 import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
-import { useFetch } from "../../hooks/useFetch";
 
 function Create() {
   const [baslik, setBaslik] = useState("");
@@ -12,13 +11,23 @@ function Create() {
   const [resim, setResim] = useState("");
   const [url, seturl] = useState("");
   const malzemeinput = useRef(null);
-  const { postData } = useFetch(
-    "https://vercel.com/proprogam/yemek-tarifleri-node-js/createPosts",
-    "POST"
-  );
+
   const handeleSubmit = (e) => {
     e.preventDefault();
-    postData({ baslik, aciklama, malzemeler, hazirlanisi, resim, url });
+    fetch("https://yemek-tarifleri-node-js.vercel.app/createPosts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        baslik,
+        aciklama,
+        malzemeler,
+        hazirlanisi,
+        resim,
+        url,
+      }),
+    });
   };
   const handleMalzemeler = (e) => {
     const item = malzeme.trim();

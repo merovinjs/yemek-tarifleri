@@ -1,17 +1,22 @@
 import React from "react";
 import ProductCard from "../../components/productCard/ProductCard";
-import { useFetch } from "../../hooks/useFetch";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function Home() {
-  const url = "https://vercel.com/proprogam/yemek-tarifleri-node-js/getPosts";
-  const { data: tarifler, isLoading, error } = useFetch(url);
+  const [tarifler, settarifler] = useState("");
+  const url = "https://yemek-tarifleri-node-js.vercel.app/getPosts";
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => settarifler(data.getpost));
+  }, []);
 
+  console.log(tarifler);
   return (
     <div className="card-group">
-      {isLoading && <h1>Loading...</h1>}
-      {error && <h1 className="text-danger">Hata</h1>}
       {tarifler &&
-        tarifler.map((tarif) => <ProductCard tarif={tarif} key={tarif.id} />)}
+        tarifler.map((tarif) => <ProductCard tarif={tarif} key={tarif._id} />)}
     </div>
   );
 }

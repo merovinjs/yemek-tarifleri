@@ -28,6 +28,7 @@ export const useFetch = (url, method = "GET") => {
         const data = await response.json();
         setIsloading(false);
         setData(data);
+        console.log(data);
       } catch (err) {
         setIsloading(false);
         setError(`${err}`);
