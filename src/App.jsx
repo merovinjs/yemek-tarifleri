@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       { path: "/tarifler", element: <Home /> },
       { path: "/create", element: <Create /> },
       { path: "/search", element: <Search /> },
-      { path: "/tarifler/:id", element: <Details /> },
+      { path: "/getDetail/:id", element: <Details /> },
     ],
   },
 ]);

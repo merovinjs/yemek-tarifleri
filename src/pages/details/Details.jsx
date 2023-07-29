@@ -4,20 +4,37 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import styles from "./Details.module.css";
-import { useFetch } from "../../hooks/useFetch";
 
 function Details() {
   const { id } = useParams();
 
-  let url = `https://json-server-vercel-nine-xi.vercel.app/tarifler/${id}`;
+  const [tarif, settarif] = useState("");
 
-  const { data: tarif, isLoading, error } = useFetch(url);
+  useEffect(() => {
+    async function fetchData() {
+      let url = `https://yemek-tarifleri-node-js.vercel.app/getDetail/${id}`;
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          console.log(data);
+          if (data.detailPost) {
+            settarif(data.detailPost);
+          } else {
+            console.error("Veri beklenen formatta değil");
+          }
+        } else {
+          console.error("API çağrısı başarısız");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="row mt-3">
-      {error && <h1 className="text-danger">{error}</h1>}
-
-      {isLoading && <h1>tarif ...</h1>}
       {tarif && (
         <>
           <div className="col-4">
@@ -35,7 +52,7 @@ function Details() {
           <hr />
           <div className="col-12">
             <p>{tarif.hazirlanisi}</p>
-            <Link to={tarif.url} className={styles.button}>
+            <Link to={`/getDetail/${id}`} className={styles.button}>
               Tarif İncele
             </Link>
           </div>

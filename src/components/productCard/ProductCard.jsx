@@ -13,7 +13,7 @@ function ProductCard({ tarif }) {
         <div className="card-body">
           <h5 className="card-title">{tarif.baslik}</h5>
           <p className={styles.acıklama}>{tarif.açıklama}</p>
-          <Link to={`/tarifler/${tarif.id}`} className="btn btn-primary">
+          <Link to={`/getDetail/${tarif._id}`} className="btn btn-primary">
             Tarifi incele
           </Link>
         </div>
