@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 function Create() {
   const [baslik, setBaslik] = useState("");
   const [açıklama, setAciklama] = useState("");
@@ -11,6 +11,7 @@ function Create() {
   const [resim, setResim] = useState("");
   const [url, seturl] = useState("");
   const malzemeinput = useRef(null);
+  const navigate = useNavigate();
   const handeleSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch(
@@ -32,6 +33,7 @@ function Create() {
     );
     const data = await response.json();
     console.log(data);
+    navigate("/");
   };
 
   const handleMalzemeler = (e) => {
